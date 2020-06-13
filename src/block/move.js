@@ -1,5 +1,3 @@
-import { isTrue } from '../helpers';
-
 const moveBlock = (block, x, y = 1) =>
   block.map((i) => ({ x: i.x + x, y: i.y + y }));
 
@@ -14,9 +12,8 @@ const collideArr = (board) => (acc, curr) => [
 const notCollide = ({ block, direction, board }, x) =>
   moveBlock(block, x || direction)
     .reduce(collideArr(board), [])
-    .every(isTrue);
+    .every(Boolean);
 
 const canMove = (state) => notCollide(state) && notOutOfBound(state);
-
 
 export { canMove, notCollide, moveBlock };
